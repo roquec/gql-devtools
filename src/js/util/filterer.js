@@ -38,11 +38,11 @@ function matchesXHRFilter(request) {
     return true;
   }
 
-  if (request._resourceType === "xhr") {
+  if (request.resourceType === "xhr") {
     return true;
   }
 
-  if (request._resourceType === "fetch") {
+  if (request.resourceType === "fetch") {
     return true;
   }
 
@@ -53,16 +53,20 @@ function matchesGQLFilter(request) {
   if (!filterGQL) {
     return true;
   }
-  //TODO: add conditions
-  return true;
+
+  if (request.gql) {
+    return true;
+  }
+
+  return false;
 }
 
-function matchesSearchFilter(request, query) {
+function matchesSearchFilter(request) {
   if (!searchQuery) {
     return true;
   }
 
-  if (request.request.url.includes(query)) {
+  if (request.url.includes(searchQuery)) {
     return true;
   }
 

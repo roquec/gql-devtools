@@ -20,6 +20,7 @@ function toGQLRequest(request) {
     headers: request.request.headers,
     method: request.request.method,
     body: request.request.postData,
+    resourceType: request._resourceType,
     json: json,
     gql: gql,
   };

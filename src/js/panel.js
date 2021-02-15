@@ -7,18 +7,22 @@ chrome.devtools.network.onRequestFinished.addListener(function () {
 });
 
 window.onload = function () {
+  refreshRequests();
+  document
+    .getElementById("all-checkbox")
+    .addEventListener("change", function () {
+      refreshRequests();
+    });
   document
     .getElementById("xhr-checkbox")
     .addEventListener("change", function () {
       refreshRequests();
     });
-
   document
     .getElementById("gql-checkbox")
     .addEventListener("change", function () {
       refreshRequests();
     });
-
   let timeout = null;
   document
     .getElementById("search-field")
@@ -32,8 +36,8 @@ window.onload = function () {
 
 function refreshRequests() {
   chrome.devtools.network.getHAR(function (harLog) {
-    var rawRequests = filterer.filter(harLog.entries);
-    var requests = mapper.toGQLRequests(rawRequests);
-    renderer.renderRequests(requests);
+    var requests = mapper.toGQLRequests(harLog.entries);
+    var filteredRequests = filterer.filterRequests(requests);
+    renderer.renderRequests(filteredRequests);
   });
 }

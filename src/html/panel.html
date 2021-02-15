@@ -1,13 +1,17 @@
 <html>
   <head>
-    <script src="/js/panel.js"></script>
+    <script src="./../js/panel.js"></script>
+    <link rel="stylesheet" href="./../libs/codemirror.css" />
+    <link rel="stylesheet" href="./../libs/foldgutter.css" />
+    <link rel="stylesheet" href="./../libs/darcula.css" />
   </head>
   <body>
     <h1>GQL DevTools!</h1>
     <div>
-      <input type="text" name="search" id="search-field" />
-      <input type="checkbox" name="xhr" id="xhr-checkbox" checked />np
-      <input type="checkbox" name="gql" id="gql-checkbox" />
+      <input type="text" name="search" placeholder="Filter" id="search-field" />
+      <input type="radio" name="filter" value="All" id="all-checkbox" />
+      <input type="radio" name="filter" value="XHR" id="xhr-checkbox" checked />
+      <input type="radio" name="filter" value="GQL" id="gql-checkbox" />
     </div>
 
     <div id="main">
