@@ -1,0 +1,26 @@
+{
+  "name": "chrome-extension-typescript-starter",
+  "version": "1.0.0",
+  "description": "chrome-extension-typescript-starter",
+  "type": "module",
+  "scripts": {
+    "watch": "nodemon -e html,js,json,css --watch src -x \"npm run build\"",
+    "build": "npm run clean && webpack --config webpack/webpack.dev.js && npm run copy",
+    "build:prod": "npm run clean && webpack --config webpack/webpack.prod.js && npm run copy:prod",
+    "copy": "copyfiles -au 1 src/**/*.{html,css,json} dist/dev",
+    "copy:prod": "copyfiles -au 1 src/**/*.{html,css,json} dist/prod",
+    "clean": "rimraf dist/dev",
+    "clean:prod": "rimraf dist/prod"
+  },
+  "dependencies": {
+    "prettier": "^2.2.1"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "nodemon": "^2.0.7",
+    "rimraf": "^3.0.2",
+    "webpack": "^5.21.2",
+    "webpack-cli": "^4.5.0",
+    "webpack-merge": "^5.7.3"
+  }
+}
