@@ -1,71 +1,39 @@
-import requestFilterer from "./util/request-filterer.js";
-import formatter from "./util/formatter.js";
+import filterer from "./util/filterer.js";
+import mapper from "./util/mapper.js";
+import renderer from "./util/renderer.js";
 
 chrome.devtools.network.onRequestFinished.addListener(function () {
   refreshRequests();
 });
 
+window.onload = function () {
+  document
+    .getElementById("xhr-checkbox")
+    .addEventListener("change", function () {
+      refreshRequests();
+    });
+
+  document
+    .getElementById("gql-checkbox")
+    .addEventListener("change", function () {
+      refreshRequests();
+    });
+
+  let timeout = null;
+  document
+    .getElementById("search-field")
+    .addEventListener("keyup", function () {
+      clearTimeout(timeout);
+      timeout = setTimeout(function () {
+        refreshRequests();
+      }, 250);
+    });
+};
+
 function refreshRequests() {
   chrome.devtools.network.getHAR(function (harLog) {
-    var rawRequests = requestFilterer.filterRequests(harLog.entries);
-    var requests = cleanRequests(rawRequests);
-    renderRequests(requests);
+    var rawRequests = filterer.filter(harLog.entries);
+    var requests = mapper.toGQLRequests(rawRequests);
+    renderer.renderRequests(requests);
   });
 }
-
-//#region Rendering
-function renderRequests(requests) {
-  clearRenderedRequestList();
-  renderRequestList(requests);
-}
-
-function clearRenderedRequestList() {
-  var list = document.getElementById("requests");
-
-  while (list.firstChild) {
-    list.removeChild(list.firstChild);
-  }
-}
-
-function renderRequestList(requests) {
-  var list = document.getElementById("requests");
-
-  for (var i = 0; i < requests.length; i++) {
-    var item = createRequestElement(requests[i]);
-    list.appendChild(item);
-  }
-}
-
-function createRequestElement(request) {
-  var body = JSON.parse(request.postData.text);
-  var gqlQuery = body.query;
-  var prettyGQL = formatter.formatGQL(gqlQuery, {});
-  console.log(
-    "🚀 ~ file: panel.js ~ line 20 ~ renderRequests ~ prettyGQL",
-    prettyGQL
-  );
-
-  var item = document.createElement("li");
-  item.appendChild(document.createTextNode(request.url));
-  return item;
-}
-//#endregion
-
-//#region Mapping
-function cleanRequests(requests) {
-  return requests.map(toCleanRequest);
-}
-
-function toCleanRequest(request) {
-  return {
-    url: request.request.url,
-    startedDateTime: request.startedDateTime,
-    time: request.time,
-    headers: request.request.headers,
-    method: request.request.method,
-    postData: request.request.postData,
-  };
-}
-
-function isGQL(request) {}
-//#endregion

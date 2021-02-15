@@ -1,36 +1,12 @@
-window.onload = function () {
-  document
-    .getElementById("xhr-checkbox")
-    .addEventListener("change", function () {
-      refreshRequests();
-    });
-
-  document
-    .getElementById("gql-checkbox")
-    .addEventListener("change", function () {
-      refreshRequests();
-    });
-
-  let timeout = null;
-  document
-    .getElementById("search-field")
-    .addEventListener("keyup", function () {
-      clearTimeout(timeout);
-      timeout = setTimeout(function () {
-        refreshRequests();
-      }, 250);
-    });
-};
-
 var filterGQL = false;
 var filterXHR = false;
 var searchQuery = null;
 
 export default {
-  filter: filter,
+  filterRequests: filterRequests,
 };
 
-function filter(allRequests) {
+function filterRequests(allRequests) {
   setFilteringState();
   return allRequests.filter(matchesFilters);
 }

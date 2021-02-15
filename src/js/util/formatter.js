@@ -3,6 +3,7 @@ import graphql from "prettier/parser-graphql.js";
 
 export default {
   formatGQL: formatGQL,
+  formatJSON: formatJSON,
 };
 
 function formatGQL(query, options) {
@@ -11,4 +12,8 @@ function formatGQL(query, options) {
     parser: "graphql",
     plugins: [graphql],
   });
+}
+
+function formatJSON(query) {
+  return JSON.stringify(JSON.parse(query), null, 2);
 }
