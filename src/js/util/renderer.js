@@ -2,10 +2,6 @@ import codemirror from "codemirror";
 import "codemirror/addon/fold/foldgutter.js";
 import "codemirror/addon/fold/brace-fold.js";
 import "codemirror-graphql/mode.js";
-import "codemirror-graphql/hint.js";
-import "codemirror-graphql/lint.js";
-import "codemirror-graphql/info.js";
-import "codemirror-graphql/jump.js";
 
 export default {
   renderRequests: renderRequests,

@@ -4,15 +4,11 @@
   "description": "chrome-extension-typescript-starter",
   "type": "module",
   "scripts": {
-    "watch": "nodemon -e html,js,json,css --watch src -x \"npm run build\"",
-    "build": "npm run clean && webpack --config webpack/webpack.dev.js && npm run copy",
-    "build:prod": "npm run clean:prod && webpack --config webpack/webpack.prod.js && npm run copy:prod",
-    "copy": "copyfiles -au 1 src/**/*.{html,css,json} dist/dev && npm run copy:static",
-    "copy:prod": "copyfiles -au 1 src/**/*.{html,css,json} dist/prod && npm run copy:static:prod",
-    "clean": "rimraf dist/dev",
-    "clean:prod": "rimraf dist/prod",
-    "copy:static": "copyfiles -f node_modules/codemirror/lib/codemirror.css node_modules/codemirror/addon/fold/foldgutter.css node_modules/codemirror/theme/darcula.css dist/dev/libs",
-    "copy:static:prod": "copyfiles -f node_modules/codemirror/lib/codemirror.css node_modules/codemirror/addon/fold/foldgutter.css dist/prod/libs"
+    "watch": "node build/watch.js",
+    "build": "node build/build.js",
+    "build:prod": "node build/build.js -- --prod",
+    "clean": "node build/clean.js",
+    "clean:prod": "node build/clean.js -- --prod"
   },
   "dependencies": {
     "codemirror": "^5.59.2",

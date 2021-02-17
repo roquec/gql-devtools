@@ -14,4 +14,9 @@ export default {
   resolve: {
     modules: [path.join(__dirname, "node_modules")],
   },
+  stats: "errors-only",
+  performance: {
+    maxEntrypointSize: 1000000,
+    maxAssetSize: 1000000,
+  },
 };
