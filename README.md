@@ -27,7 +27,3 @@ npm run watch
 ```
 npm run clean
 ```
-
-```
-npm run clean:prod
-```
