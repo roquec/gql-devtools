@@ -1,6 +1,6 @@
 import scriptr from "./scriptr.js";
 
-var environment = scriptr.env();
+var environment = scriptr.param("env", "dev");
 
 var cssFiles = [
   "node_modules/codemirror/lib/codemirror.css",

@@ -5,7 +5,6 @@ export default {
   run: run,
   param: param,
   params: params,
-  env: env,
 };
 
 function run(...commands) {
@@ -27,18 +26,18 @@ function run(...commands) {
   );
 }
 
-function param(name) {
-  var parameter = process.argv.find((p) => p.startsWith(`--${name}`));
+function param(name, fallback = null) {
+  var parameter = process.argv.reverse().find((p) => p.startsWith(`--${name}`));
 
   if (!parameter) {
-    return null;
+    return fallback;
   }
 
   if (parameter.length <= `--${name}=`.length) {
     return true;
   }
 
-  var value = parameter.subString(`--${name}=`.length, parameter.length);
+  var value = parameter.substr(`--${name}=`.length, parameter.length);
 
   return value;
 }
@@ -51,8 +50,4 @@ function params() {
   }
 
   return parameters.join(" ");
-}
-
-function env() {
-  return param("prod") ? "prod" : "dev";
 }
