@@ -11,15 +11,15 @@ npm install
 ## Build
 
 ```
+npm run watch
+```
+
+```
 npm run build
 ```
 
 ```
 npm run build:prod
-```
-
-```
-npm run watch
 ```
 
 ## Clean

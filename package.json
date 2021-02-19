@@ -1,8 +1,10 @@
 {
-  "name": "chrome-extension-typescript-starter",
+  "name": "gql-devtools",
   "version": "1.0.0",
-  "description": "chrome-extension-typescript-starter",
-  "type": "module",
+  "description": "Browser DevTools extension for GQL",
+  "author": {
+    "name": "Alberto Roque Carrizo Fernández"
+  },
   "scripts": {
     "watch": "node build/watch.js -- --env=dev",
     "build": "node build/build.js -- --env=dev",
@@ -21,5 +23,18 @@
     "webpack": "^5.21.2",
     "webpack-cli": "^4.5.0",
     "webpack-merge": "^5.7.3"
-  }
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/roquec/gql-devtools"
+  },
+  "keywords": [
+    "gql",
+    "graphql",
+    "extension",
+    "chrome",
+    "devtools"
+  ],
+  "license": "MIT"
 }

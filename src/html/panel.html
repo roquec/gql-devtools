@@ -1,13 +1,14 @@
 <html>
   <head>
+    <meta charset="utf-8" />
     <script src="./../js/panel.js"></script>
     <link rel="stylesheet" href="./../libs/codemirror.css" />
     <link rel="stylesheet" href="./../libs/foldgutter.css" />
     <link rel="stylesheet" href="./../libs/darcula.css" />
   </head>
   <body>
-    <h1>GQL DevTools!</h1>
-    <div>
+    <h1>GQL DevTools! :O</h1>
+    <div id="filter-bar">
       <input type="text" name="search" placeholder="Filter" id="search-field" />
       <input type="radio" name="filter" value="All" id="all-checkbox" />
       <input type="radio" name="filter" value="XHR" id="xhr-checkbox" checked />
@@ -15,17 +16,19 @@
     </div>
 
     <div id="main">
-      <ul id="requests"></ul>
-    </div>
+      <table id="requests">
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Time</th>
+        </tr>
+      </table>
 
-    <div id="side">
-      <div id="request"></div>
-      <div id="headers"></div>
-      <div id="body-raw"></div>
-      <div id="body-json"></div>
-      <div id="body-gql">
-        <div id="body-gql-variables"></div>
-        <div id="body-gql-query"></div>
+      <div id="side">
+        <div id="info"></div>
+        <div id="request"></div>
+        <div id="response"></div>
       </div>
     </div>
   </body>

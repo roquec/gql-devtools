@@ -11,9 +11,6 @@ export default {
     path: path.join(__dirname, "dist/js"),
     filename: "[name].js",
   },
-  resolve: {
-    modules: [path.join(__dirname, "node_modules")],
-  },
   stats: "errors-only",
   performance: {
     maxEntrypointSize: 1000000,
